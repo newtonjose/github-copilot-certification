@@ -10,6 +10,8 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 import os
 from pathlib import Path
+from pydantic import BaseModel
+from typing import List
 
 app = FastAPI(title="Mergington High School API",
               description="API for viewing and signing up for extracurricular activities")
@@ -78,6 +80,11 @@ activities = {
 }
 
 
+class CityList(BaseModel):
+    cities: List[str]
+
+
+
 @app.get("/")
 def root():
     return RedirectResponse(url="/static/index.html")
@@ -105,3 +112,19 @@ def signup_for_activity(activity_name: str, email: str):
     # Add student
     activity["participants"].append(email)
     return {"message": f"Signed up {email} for {activity_name}"}
+
+
+@app.get("/countries/{country_name}", response_model=CityList)
+def get_country(country_name: str):
+    """Get the cities of a country"""
+    # Simulate database lookup
+    country_cities = {
+        "USA": ["New York", "Los Angeles", "Chicago"],
+        "Canada": ["Toronto", "Montreal", "Vancouver"],
+        "Brazil": ["Sao Paulo", "Rio de Janeiro", "Brasilia"]
+    }
+
+    if country_name in country_cities:
+        return CityList(cities=country_cities[country_name])
+    else:
+        raise HTTPException(status_code=404, detail="Country not found")
