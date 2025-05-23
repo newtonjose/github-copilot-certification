@@ -84,40 +84,57 @@ class CityList(BaseModel):
     cities: List[str]
 
 
-
 @app.get("/")
 def root():
+    """
+    Redireciona para a página inicial estática da aplicação web.
+    """
     return RedirectResponse(url="/static/index.html")
 
 
 @app.get("/activities")
 def get_activities():
+    """
+    Retorna todas as atividades extracurriculares disponíveis.
+    """
     return activities
 
 
 @app.post("/activities/{activity_name}/signup")
 def signup_for_activity(activity_name: str, email: str):
-    """Sign up a student for an activity"""
-    # Validate activity exists
+    """
+    Inscreve um estudante em uma atividade específica.
+    Args:
+        activity_name (str): O nome da atividade para inscrição.
+        email (str): O endereço de e-mail do estudante.
+    Raises:
+        HTTPException: Se a atividade não existir (404).
+        HTTPException: Se o estudante já estiver inscrito na atividade (400).
+    Returns:
+        dict: Uma mensagem confirmando que o estudante foi inscrito na atividade.
+    """
+    # Valida se a atividade existe
     if activity_name not in activities:
-        raise HTTPException(status_code=404, detail="Activity not found")
+        raise HTTPException(status_code=404, detail="Atividade não encontrada")
 
-    # Get the specificy activity
+    # Obtém a atividade específica
     activity = activities[activity_name]
 
-    # Validar se o aluno já está inscrito
+    # Valida se o aluno já está inscrito
     if email in activity["participants"]:
-        raise HTTPException(status_code=400, detail="Already signed up")
+        raise HTTPException(status_code=400, detail="Já inscrito")
     
-    # Add student
+    # Adiciona o estudante
     activity["participants"].append(email)
-    return {"message": f"Signed up {email} for {activity_name}"}
+    return {"message": f"{email} inscrito em {activity_name}"}
 
 
 @app.get("/countries/{country_name}", response_model=CityList)
 def get_country(country_name: str):
-    """Get the cities of a country"""
-    # Simulate database lookup
+    """
+    Retorna as cidades de um país.
+    """
+    # Simula consulta ao banco de dados
     country_cities = {
         "USA": ["New York", "Los Angeles", "Chicago"],
         "Canada": ["Toronto", "Montreal", "Vancouver"],
@@ -127,4 +144,4 @@ def get_country(country_name: str):
     if country_name in country_cities:
         return CityList(cities=country_cities[country_name])
     else:
-        raise HTTPException(status_code=404, detail="Country not found")
+        raise HTTPException(status_code=404, detail="País não encontrado")
