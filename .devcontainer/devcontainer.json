@@ -22,5 +22,8 @@
         "github.vscode-github-actions"
       ]
     }
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {}
   }
 }
