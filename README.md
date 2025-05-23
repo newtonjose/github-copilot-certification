@@ -53,6 +53,26 @@ Neste exercício, você irá:
 
 ---
 
+**Resumo do Projeto: Aplicação Web de Atividades da Escola Secundária Mergington**
+
+Este projeto entrega uma aplicação web moderna para gerenciar atividades extracurriculares na Escola Secundária Mergington. Construída com FastAPI (Python) no backend e um frontend responsivo em HTML/CSS/JavaScript, a plataforma permite que estudantes visualizem as atividades disponíveis e realizem inscrições online. Todos os dados são gerenciados em memória para simplicidade e prototipagem rápida.
+
+**Principais Funcionalidades:**
+- **Portal do Estudante:** Estudantes podem navegar por descrições detalhadas das atividades, horários e listas de participantes.
+- **Inscrição Online:** Processo seguro de inscrição que previne registros duplicados e respeita o limite de vagas.
+- **API-Driven:** Endpoints RESTful facilitam integração e automação.
+- **Ambiente de Desenvolvimento Moderno:** O projeto utiliza um dev container pré-configurado com Python, Node.js, npm, ESLint e Git atualizados, garantindo uma experiência de desenvolvimento consistente e eficiente.
+- **Testes Automatizados & CI:** Inclui testes unitários e workflows do GitHub Actions para garantia de qualidade e implantação simplificada.
+
+**Valor para o Negócio:**
+- Otimiza o gerenciamento de atividades e o engajamento dos estudantes.
+- Demonstra boas práticas em desenvolvimento em nuvem e conteinerização.
+- Serve como modelo para transformação digital rápida em ambientes educacionais.
+
+Para mais detalhes, veja a aplicação principal em [`src/app.py`](src/app.py), o frontend em [`src/static/`](src/static/), e a configuração do ambiente em [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json).
+
+---
+
 Obtenha ajuda: [Publique em nosso fórum de discussão](https://github.com/orgs/Copilot-Workshop-Invillia/discussions/categories/getting-started-with-github-copilot) &bull; [Confira a página de status do GitHub](https://www.githubstatus.com/)
 
 &copy; 2025 GitHub &bull; [Código de Conduta](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [Licença MIT](https://gh.io/mit)
